@@ -23,7 +23,6 @@
       <link rel="stylesheet" href="/assets/styles/docs.css" data-turbo-track="reload" />
     {% endif %}
 
-
     {% block head %}{% endblock %}
 
     <script type="module">
@@ -34,18 +33,28 @@
     </script>
 
     <script type="module">
-      // Set the initial theme before the page renders to prevent flashing
-      const savedTheme = localStorage.getItem('theme') || 'default';
+      ;(() => {
+        // Set the initial theme before the page renders to prevent flashing
+        let savedTheme = localStorage.getItem('theme') || 'default';
 
-      // Update the theme stylesheet link first
-      const themeStylesheet = document.getElementById('theme-stylesheet');
-      if (themeStylesheet) {
-        themeStylesheet.href = `/dist/styles/themes/${savedTheme}.css`;
-      }
+        // Update the theme stylesheet link first
+        const themeStylesheet = document.getElementById('theme-stylesheet');
 
-      if (savedTheme !== 'default') {
-        document.documentElement.classList.add(`wa-theme-${savedTheme}`);
-      }
+        if ({{ pageType == "marketing" }}) {
+          savedTheme = "theme-marketing.css"
+          themeStylesheet.href = `/assets/styles/theme-marketing.css`;
+          document.documentElement.classList.add(`wa-theme-marketing`);
+          return;
+        }
+
+        if (themeStylesheet) {
+          themeStylesheet.href = `/dist/styles/themes/${savedTheme}.css`;
+        }
+
+        if (savedTheme !== 'default') {
+          document.documentElement.classList.add(`wa-theme-${savedTheme}`);
+        }
+      })();
     </script>
   </head>
   <body class="layout-{{ layout | stripExtension }} page-{{ page.fileSlug or 'home' }}{{ ' page-wide' if wide }} page-{{ pageType or 'docs' }}">
