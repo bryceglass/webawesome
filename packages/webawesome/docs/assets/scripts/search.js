@@ -32,12 +32,18 @@ document.addEventListener('keydown', event => {
 });
 
 // Show the search dialog when clicking on elements with the `data-search` attribute
-document.addEventListener('click', event => {
-  const searchButton = event.target.closest('[data-search]');
-  if (searchButton) {
+document.addEventListener(
+  'click',
+  event => {
+    const trigger = event.target.closest('[data-search]');
+    if (!trigger) return;
+
+    event.preventDefault(); // stop any native behavior
+    event.stopImmediatePropagation(); // block other handlers
     show();
-  }
-});
+  },
+  true,
+); // capture: run before any native elements handle the click
 
 function show() {
   const { dialog, input, results } = getElements();
