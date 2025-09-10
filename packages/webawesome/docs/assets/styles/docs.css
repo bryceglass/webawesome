@@ -9,6 +9,13 @@
 :root {
   --wa-brand-orange: #f36944;
   --wa-brand-grey: #30323b;
+
+  --line-length-xs: 30ch;
+  --line-length-s: 45ch;
+  --line-length-m: 66ch;
+  --line-length-l: 77ch;
+  --line-length-xl: 90ch;
+  --line-length-none: none;
 }
 
 .wa-dark .only-light,
@@ -685,4 +692,42 @@ wa-scroller:has(.component-table) {
     height: 65vh;
     max-height: 21lh;
   }
+}
+
+/* TODO: Figure out a place for these to be used across webawesome, webawesome-pro, and webawesome-app */
+/* utilities */
+
+/* line-length */
+.line-length {
+  max-width: var(--line-length, none);
+}
+
+.line-length-xs {
+  --line-length: var(--line-length-xs);
+}
+.line-length-s {
+  --line-length: var(--line-length-s);
+}
+.line-length-m {
+  --line-length: var(--line-length-m);
+}
+.line-length-l {
+  --line-length: var(--line-length-l);
+}
+.line-length-xl {
+  --line-length: var(--line-length-xl);
+}
+.line-length-none {
+  --line-length: none;
+}
+
+/* buttons with icon toggle on hover */
+wa-button .icon-hover {
+  display: none;
+}
+wa-button:hover .icon-default {
+  display: none;
+}
+wa-button:hover .icon-hover {
+  display: inline-flex;
 }
