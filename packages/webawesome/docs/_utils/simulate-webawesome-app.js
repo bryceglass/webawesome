@@ -13,6 +13,7 @@ export function SimulateWebAwesomeApp(str) {
       head: '',
       loginOrAvatar: '',
       flashes: '',
+      popovers: '',
     },
   });
 }
